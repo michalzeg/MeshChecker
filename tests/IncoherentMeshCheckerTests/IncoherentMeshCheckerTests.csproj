@@ -80,6 +80,10 @@
       <Project>{5a6eadf8-0a17-426d-8736-82f5adc5de59}</Project>
       <Name>IncoherentMeshChecker.Calculations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\IncoherentMeshChecker.Shared\IncoherentMeshChecker.Shared.csproj">
+      <Project>{35c5b67c-709b-49d0-8bc1-04632b12a47b}</Project>
+      <Name>IncoherentMeshChecker.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
