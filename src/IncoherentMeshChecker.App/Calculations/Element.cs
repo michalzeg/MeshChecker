@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 using IncoherentMeshChecker.Model.Geometry;
 
 namespace IncoherentMeshChecker.Model.Elements
 {
-    public abstract class Element : IEquatable<Element> //describes finite element
+    public abstract class Element : IEquatable<Element>
     {
         public int NumberOfNodes { get { return this.numberOfNodes; } }
         public int Number { get { return this.number; } }
@@ -17,9 +18,9 @@ namespace IncoherentMeshChecker.Model.Elements
         protected IList<Node> nodes;
         protected PointD centre;
 
-        protected abstract void calculateCentre();
+        protected abstract void CalculateCentre();
 
-        protected void checkNumberOfNodesInArray(IList<Node> nodes)
+        protected void CheckNumberOfNodesInArray(IList<Node> nodes)
         {
             if (nodes.Count != this.numberOfNodes)
             {
@@ -28,7 +29,7 @@ namespace IncoherentMeshChecker.Model.Elements
             }
         }
 
-        protected void checkIfNodesAreNull(IList<Node> nodes)
+        protected void CheckIfNodesAreNull(IList<Node> nodes)
         {
             if (nodes.Any(n => n == null))
                 throw new ArgumentNullException("One of the nodes is null");

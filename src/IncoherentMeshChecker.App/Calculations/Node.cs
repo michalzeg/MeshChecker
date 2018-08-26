@@ -1,5 +1,6 @@
 ﻿using System;
 using IncoherentMeshChecker.Model.Geometry;
+
 namespace IncoherentMeshChecker.Model.Elements
 {
     public class Node : IEquatable<Node>
@@ -7,8 +8,11 @@ namespace IncoherentMeshChecker.Model.Elements
         public int Number { get; set; }
         public PointD Coordinates { get; set; }
 
-        public Node() { }
-        public Node(int number,PointD coordinates)
+        public Node()
+        {
+        }
+
+        public Node(int number, PointD coordinates)
         {
             this.Number = number;
             this.Coordinates = coordinates;
@@ -18,9 +22,8 @@ namespace IncoherentMeshChecker.Model.Elements
         {
             if (Object.ReferenceEquals(other, null)) return false;
 
-            //Check whether the compared object references the same data. 
             if (Object.ReferenceEquals(this, other)) return true;
-            //Check whether the products' properties are equal. 
+
             return this.Number == other.Number && this.Coordinates == other.Coordinates;
         }
 
@@ -40,6 +43,5 @@ namespace IncoherentMeshChecker.Model.Elements
 
             return numberHash ^ coordinatesHash;
         }
-
     }
 }

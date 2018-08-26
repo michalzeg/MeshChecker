@@ -85,15 +85,17 @@
     <Compile Include="Calculations\Node.cs" />
     <Compile Include="Calculations\NodePositionCheck.cs" />
     <Compile Include="Calculations\PointD.cs" />
-    <Compile Include="Calculations\PositionOfNodes.cs" />
+    <Compile Include="Calculations\NodePosition.cs" />
     <Compile Include="Calculations\QuadElement.cs" />
     <Compile Include="Calculations\TriangleElement.cs" />
+    <Compile Include="Extensions\CollectionExtension.cs" />
+    <Compile Include="Helpers\ClipboardOperations.cs" />
     <Compile Include="Helpers\NodeTable.cs" />
     <Compile Include="Helpers\ProgressArgument.cs" />
     <Compile Include="Helpers\PropertyName.cs" />
     <Compile Include="Calculations\BeamElement.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Calculations\Geometry.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Calculations\Vector.cs" />
     <Compile Include="Calculations\IncoherentnessCheck.cs" />
     <Page Include="StylesDictionary.xaml">
       <SubType>Designer</SubType>
@@ -107,10 +109,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Validation\HeadersValidation.cs" />
+    <Compile Include="Helpers\TableOperations.cs" />
+    <Compile Include="Validation\TableValidation.cs" />
+    <Compile Include="Validation\TableHeaderValidation.cs" />
     <Compile Include="ViewModel\TableDataConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\PastingDataFromClipBoard.cs" />
+    <Compile Include="Helpers\PastingDataFromClipBoard.cs" />
     <Compile Include="Helpers\ElementTable.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

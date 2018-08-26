@@ -25,21 +25,16 @@ namespace IncoherentMeshChecker
             InitializeComponent();
         }
 
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder text = new StringBuilder();
             foreach (string s in listBoxResults.ItemsSource)
             {
                 text.Append(s);
-               text.Append(" ");
+                text.Append(" ");
             }
 
-            //string text = string.Join("\r\n", this.listBoxResults.ItemsSource);
-            //string text = string.Join(" ", listBoxResults.ItemsSource);
             Clipboard.SetText(text.ToString());
-            //Clipboard
         }
     }
 }

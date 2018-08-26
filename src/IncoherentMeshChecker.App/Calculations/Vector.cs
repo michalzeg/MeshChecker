@@ -11,9 +11,9 @@ namespace IncoherentMeshChecker.Model.Geometry
     {
         public static readonly Vector NullVector = new Vector(0, 0, 0);
 
-        public double X { get; set; }//coordinate in X direction
-        public double Y { get; set; }//coordinate in Y direction
-        public double Z { get; set; }//coordinate in Z direction
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
         public Vector()
         {

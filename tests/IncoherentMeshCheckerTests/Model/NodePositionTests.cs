@@ -21,7 +21,7 @@ namespace IncoherentMeshChecker.Model.Incoherentness.Tests
             Node nodeToCheck = new Node(3, new PointD(1.500, 2.000, 5.000));
          
 
-            Assert.IsTrue(PositionOfNodes.CheckNodePosition(node1, node2, nodeToCheck));
+            Assert.IsTrue(NodePosition.CheckNodePosition(node1, node2, nodeToCheck));
         }
 
         [TestMethod()]
@@ -32,7 +32,7 @@ namespace IncoherentMeshChecker.Model.Incoherentness.Tests
             Node nodeToCheck = new Node(3, new PointD(-0.5001458, 2.0001458, 5.0001458));
           
 
-            Assert.IsFalse(PositionOfNodes.CheckNodePosition(node1, node2, nodeToCheck));
+            Assert.IsFalse(NodePosition.CheckNodePosition(node1, node2, nodeToCheck));
         }
     }
 }

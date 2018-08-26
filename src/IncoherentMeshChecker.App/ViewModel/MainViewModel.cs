@@ -25,8 +25,10 @@ namespace IncoherentMeshChecker.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase,IDataErrorInfo
+    public class MainViewModel : ViewModelBase, IDataErrorInfo
     {
+        private const string defaultRadious = "5";
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -40,16 +42,18 @@ namespace IncoherentMeshChecker.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
-            
+
             this.PasteNodeTable = new RelayCommand(this.pasteNodeTable);
             this.PasteElementTable = new RelayCommand(this.pasteElementTable);
             this.Cancel = new RelayCommand(this.cancel, this.canCancel);
             this.RunCalculations = new RelayCommand(this.runCalculations, this.canRunCalculations);
-            this.radious = "5";
-            this.progresIndicatior = new Progress<ProgressArgument>(this.reportProgress);  
+            this.radious = defaultRadious;
+            this.progresIndicatior = new Progress<ProgressArgument>(this.reportProgress);
         }
+
         private bool validationSuspended = true;
         private bool isBusy = false;
+
         public bool IsBusy
         {
             get { return isBusy; }
@@ -66,6 +70,7 @@ namespace IncoherentMeshChecker.ViewModel
         private CancellationTokenSource cancellationTokenSource;
 
         private ICollection<string> resultText;
+
         public ICollection<string> ResultText
         {
             get { return resultText; }
@@ -77,10 +82,10 @@ namespace IncoherentMeshChecker.ViewModel
                     RaisePropertyChanged(() => this.ResultText);
                 }
             }
-
         }
 
         private string statusBarText;
+
         public string StatusBarText
         {
             get { return statusBarText; }
@@ -92,11 +97,11 @@ namespace IncoherentMeshChecker.ViewModel
                     RaisePropertyChanged(() => this.StatusBarText);
                 }
             }
-
         }
 
         private bool nodeTableValidated = true;
         private ICollection<NodeTable> nodes;
+
         public ICollection<NodeTable> Nodes
         {
             get { return nodes; }
@@ -108,11 +113,11 @@ namespace IncoherentMeshChecker.ViewModel
                     RaisePropertyChanged(() => this.Nodes);
                 }
             }
-            
         }
 
         private bool elementTableValidated = true;
         private ICollection<ElementTable> elements;
+
         public ICollection<ElementTable> Elements
         {
             get { return elements; }
@@ -124,11 +129,11 @@ namespace IncoherentMeshChecker.ViewModel
                     RaisePropertyChanged(() => Elements);
                 }
             }
-
         }
 
         private bool radiousValidated = true;
         private string radious;
+
         public string Radious
         {
             get { return radious; }
@@ -143,6 +148,7 @@ namespace IncoherentMeshChecker.ViewModel
         }
 
         private int progress;
+
         public int Progress
         {
             get { return this.progress; }
@@ -155,7 +161,9 @@ namespace IncoherentMeshChecker.ViewModel
                 }
             }
         }
+
         private string progressText;
+
         public string ProgressText
         {
             get { return this.progressText; }
@@ -169,93 +177,75 @@ namespace IncoherentMeshChecker.ViewModel
             }
         }
 
-
         public RelayCommand PasteNodeTable { get; private set; }
+
         private async void pasteNodeTable()
         {
-            //validation
             if (checkIfBusy())
                 return;
             this.cancellationTokenSource = new CancellationTokenSource();
             this.nodeTableValidated = false;
-            IList<NodeTable> table = new List<NodeTable>();
+
             IDataObject dataInClipboard = Clipboard.GetDataObject();
             this.StatusBarText = "Current operation: Pasting node data to the table";
             this.Progress = 100;
-            this.Progress = 100;
-            if (HeaderTablesValidation.ValidateNodeTableHeaders(dataInClipboard))
-            {
 
-                PasteToDataGridView pasting = new PasteToDataGridView(this.cancellationTokenSource.Token);
-                bool result;
-                this.IsBusy = true;
-                try
-                {
-                    result = await Task<bool>.Run<bool>(() => pasting.PasteNodeTable(ref table, dataInClipboard));
+            if (!TableHeaderValidation.ValidateNodeTableHeaders(dataInClipboard))
+                return;
 
-                    //if (pasting.PasteNodeTable(ref table))
-                    if (result)
-                    {
-                        this.nodeTableValidated = true;
-                        
-                    }
-                    else
-                    {
-                        this.nodeTableValidated = false;
-                        this.ResultText = pasting.Errors;
-                    }
-                }
-                catch (OperationCanceledException)
-                {
-                    this.nodeTableValidated = false;
-                }
-            }
-            this.Nodes = table;
+            this.Nodes = await GetNodeTableData(dataInClipboard);
+
             this.IsBusy = false;
             validationSuspended = false;
             this.StatusBarText = "";
             this.Progress = 0;
             this.RunCalculations.RaiseCanExecuteChanged();
         }
-        
+
+        private async Task<IList<NodeTable>> GetNodeTableData(IDataObject dataInClipboard)
+        {
+            IList<NodeTable> table = new List<NodeTable>();
+            var pasting = new PasteToDataGridView(this.cancellationTokenSource.Token);
+            bool result;
+            this.IsBusy = true;
+            try
+            {
+                result = await Task.Run(() => pasting.PasteNodeTable(ref table, dataInClipboard));
+
+                if (result)
+                {
+                    this.nodeTableValidated = true;
+                }
+                else
+                {
+                    this.nodeTableValidated = false;
+                    this.ResultText = pasting.Errors;
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                this.nodeTableValidated = false;
+            }
+
+            return table;
+        }
+
         public RelayCommand PasteElementTable { get; private set; }
+
         private async void pasteElementTable()
         {
             if (checkIfBusy())
                 return;
             this.cancellationTokenSource = new CancellationTokenSource();
             this.elementTableValidated = false;
-            ICollection<ElementTable> table = new List<ElementTable>();
+
             IDataObject dataInClipboard = Clipboard.GetDataObject();
             this.StatusBarText = "Current operation: Pasting element data to the table";
             this.Progress = 100;
-            if (HeaderTablesValidation.ValidateElementTableHeaders(dataInClipboard))
-            {
-                PasteToDataGridView pasting = new PasteToDataGridView(this.cancellationTokenSource.Token);
-                bool result;
-                this.IsBusy = true;
-                try
-                {
-                    result = await Task<bool>.Run<bool>(() => pasting.PasteElementTable(ref table, dataInClipboard));
+            if (!TableHeaderValidation.ValidateElementTableHeaders(dataInClipboard))
+                return;
 
-                    //if (pasting.PasteElementTable(ref table,dataInClipboard))
-                    if (result)
-                    {
-                        this.elementTableValidated = true;
-                        
-                    }
-                    else
-                    {
-                        this.elementTableValidated = false;
-                        this.ResultText = pasting.Errors;
-                    }
-                }
-                catch (OperationCanceledException)
-                {
-                    this.elementTableValidated = false;
-                }
-            }
-            this.Elements = table;
+            this.Elements = await GetTableElementData(dataInClipboard);
             validationSuspended = false;
             this.IsBusy = false;
             this.StatusBarText = "";
@@ -263,10 +253,38 @@ namespace IncoherentMeshChecker.ViewModel
             this.RunCalculations.RaiseCanExecuteChanged();
         }
 
+        private async Task<ICollection<ElementTable>> GetTableElementData(IDataObject dataInClipboard)
+        {
+            ICollection<ElementTable> table = new List<ElementTable>();
+            PasteToDataGridView pasting = new PasteToDataGridView(this.cancellationTokenSource.Token);
+            bool result;
+            this.IsBusy = true;
+            try
+            {
+                result = await Task<bool>.Run<bool>(() => pasting.PasteElementTable(ref table, dataInClipboard));
+
+                if (result)
+                {
+                    this.elementTableValidated = true;
+                }
+                else
+                {
+                    this.elementTableValidated = false;
+                    this.ResultText = pasting.Errors;
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                this.elementTableValidated = false;
+            }
+
+            return table;
+        }
+
         public RelayCommand RunCalculations { get; private set; }
+
         private async void runCalculations()
         {
-            //convert data from datatables
             if (checkIfBusy())
                 return;
             this.cancellationTokenSource = new CancellationTokenSource();
@@ -281,8 +299,8 @@ namespace IncoherentMeshChecker.ViewModel
                 if (!converter.HasErrors)
                 {
                     double radious = double.Parse(this.radious);
-                    IncoherentnessChecker checker = new IncoherentnessChecker(converter.Elements, converter.Nodes, radious, this.progresIndicatior,this.cancellationTokenSource.Token);
-                    this.ResultText = await Task<ICollection<string>>.Run<ICollection<string>>(() => checker.FindIncoherentNodes());
+                    var checker = new IncoherentnessChecker(converter.Elements, converter.Nodes, radious, this.progresIndicatior, this.cancellationTokenSource.Token);
+                    this.ResultText = await Task.Run(() => checker.FindIncoherentNodes());
                 }
                 else
                 {
@@ -296,8 +314,8 @@ namespace IncoherentMeshChecker.ViewModel
 
             var endTime = DateTime.Now;
             this.IsBusy = false;
-            
         }
+
         private bool canRunCalculations()
         {
             bool result = false;
@@ -314,23 +332,26 @@ namespace IncoherentMeshChecker.ViewModel
         }
 
         public RelayCommand Cancel { get; private set; }
+
         private void cancel()
         {
             this.cancellationTokenSource.Cancel();
         }
+
         private bool canCancel()
         {
             return isBusy;
         }
+
         private void operationCancelled()
         {
             this.StatusBarText = "Operation has been canceled";
             this.ProgressText = "";
             this.Progress = 0;
         }
+
         private bool checkIfBusy()
         {
-
             if (this.IsBusy)
             {
                 MessageBox.Show("Another operation is being performed", "Information", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -339,21 +360,20 @@ namespace IncoherentMeshChecker.ViewModel
             return false;
         }
 
-
         private IProgress<ProgressArgument> progresIndicatior;
+
         private void reportProgress(ProgressArgument progress)
         {
             this.Progress = progress.Progress;
             this.ProgressText = string.Format("{0}%", progress.Progress);
             this.StatusBarText = string.Format("Current element: {0}", progress.Message);
-
         }
-
 
         public string Error
         {
             get { throw new NotImplementedException(); }
         }
+
         public string this[string columnName]
         {
             get
@@ -364,10 +384,9 @@ namespace IncoherentMeshChecker.ViewModel
                 string nodesName = PropertyName.GetPropertyName(() => this.Nodes);
                 string radiousName = PropertyName.GetPropertyName(() => this.Radious);
 
-                
                 if (columnName == elementsName)
                     error = (!this.elementTableValidated) ? "Wrong table data" : string.Empty;
-                else if (columnName == nodesName)  
+                else if (columnName == nodesName)
                     error = (!this.nodeTableValidated) ? "Wrong table data" : string.Empty;
                 else if (columnName == radiousName)
                 {
@@ -379,6 +398,5 @@ namespace IncoherentMeshChecker.ViewModel
                 return error;
             }
         }
-
     }
 }

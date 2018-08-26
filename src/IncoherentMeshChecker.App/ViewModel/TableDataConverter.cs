@@ -13,7 +13,6 @@ using System.Windows.Data;
 
 namespace IncoherentMeshChecker.Converter
 {
-
     public class TableDataConverter
     {
         public ICollection<Element> Elements { get; private set; }
@@ -30,7 +29,9 @@ namespace IncoherentMeshChecker.Converter
                 return this.errorList.Distinct().ToList();
             }
         }
+
         private List<string> errorList;
+
         public bool HasErrors
         {
             get
@@ -46,8 +47,8 @@ namespace IncoherentMeshChecker.Converter
             this.nodeTable = nodeTable;
             this.elementTable = elementTable;
             this.cancelToken = cancelToken;
-            
         }
+
         public void Convert()
         {
             this.nodeTableToNodes();
@@ -56,12 +57,6 @@ namespace IncoherentMeshChecker.Converter
 
         private void elementTableToElement()
         {
-            
-            //2 Divide collection to 3 different collections
-            // beam elements n=>n.Node3 ==0
-            // triangle collection n=n.Node4 ==0
-            //quad element -> rest
-            // create appropriate collection
             this.Elements = new HashSet<Element>();
             this.createBeamElements();
             this.createQuadElements();
@@ -78,12 +73,12 @@ namespace IncoherentMeshChecker.Converter
                 var nodes = new List<Node>();
                 nodes.Add(this.getNode(element.Node1));
                 nodes.Add(this.getNode(element.Node2));
-                
+
                 this.Elements.Add(new BeamElement(element.Element, nodes));
                 this.cancelToken.ThrowIfCancellationRequested();
             }
-            
         }
+
         private void createTriangleElements()
         {
             var triangleElementList = elementTable.Where(e => e.Node4 == 0 && e.Node3 > 0);
@@ -97,6 +92,7 @@ namespace IncoherentMeshChecker.Converter
                 this.cancelToken.ThrowIfCancellationRequested();
             }
         }
+
         private void createQuadElements()
         {
             var quadElements = elementTable.Where(e => e.Node3 > 0 && e.Node4 > 0);
@@ -126,7 +122,6 @@ namespace IncoherentMeshChecker.Converter
 
         private Node getNode(int nodeNumber)
         {
-            //use HashSet instead of List
             Node node = this.Nodes.FirstOrDefault(n => n.Number == nodeNumber);
             if (node == null)
             {
@@ -134,8 +129,6 @@ namespace IncoherentMeshChecker.Converter
                 this.errorList.Add(errorText);
             }
             return node;
-            
         }
     }
-    
 }

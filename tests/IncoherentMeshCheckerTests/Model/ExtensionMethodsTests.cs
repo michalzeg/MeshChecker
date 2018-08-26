@@ -23,7 +23,7 @@ namespace Extensions.Tests
         [TestMethod()]
         public void IsApproxiamtelyEqual_CheckIfTwoNumbersAreEqual2_Passed()
         {
-            double epsilon = ExtensionMethods.MaximumDifferenceAllowed;
+            double epsilon = DoubleExtension.MaximumDifferenceAllowed;
 
             double value1 = 1.3 * epsilon;
             double value2 = 1.25 * epsilon;

@@ -1,15 +1,10 @@
 ﻿namespace IncoherentMeshChecker.Model.Geometry
 {
-    public class Line //describes a line in 3d space
+    public class Line
     {
-        //equation of line
-        //x = Point1.X + DirectionVector.X * t
-        //y = Point1.Y + DirectionVector.Y * t
-        //z = Point1.Z + DirectionVector.Z * t
-
-        public PointD Point1 { get; set; } //point describint line
-        public PointD Point2 { get; set; }
-        public Vector DirectionVector { get; set; }
+        public PointD Point1 { get; private set; }
+        public PointD Point2 { get; private set; }
+        public Vector DirectionVector { get; private set; }
 
         public Line(PointD point1, PointD point2)
         {

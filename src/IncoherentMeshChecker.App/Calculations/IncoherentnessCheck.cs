@@ -8,16 +8,17 @@ using IncoherentMeshChecker.Model.Geometry;
 using Extensions;
 using IncoherentMeshChecker.Helpers;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace IncoherentMeshChecker.Model.Incoherentness
 {
     public class IncoherentnessChecker
     {
-        private double radious;
-        private ICollection<Element> elements;
-        private ICollection<Node> nodes;
-        private IProgress<ProgressArgument> progressReport;
-        private CancellationToken cancellationToken;
+        private readonly double radious;
+        private readonly ICollection<Element> elements;
+        private readonly ICollection<Node> nodes;
+        private readonly IProgress<ProgressArgument> progressReport;
+        private readonly CancellationToken cancellationToken;
 
         public IncoherentnessChecker(ICollection<Element> elements, ICollection<Node> nodes, double radious, IProgress<ProgressArgument> progressReport, CancellationToken cancellationToken)
         {
@@ -30,53 +31,54 @@ namespace IncoherentMeshChecker.Model.Incoherentness
 
         public ICollection<string> FindIncoherentNodes()
         {
-            ICollection<string> incoherentElements = new List<string>();
+            var incoherentElements = new List<string>();
             int numberOfElements = this.elements.Count;
             int currentElement = 1;
             foreach (Element element in this.elements)
             {
-                var nodesInRadious = this.nodes.Where(e =>
+                var nodesInRadious = this.nodes.Where(e => new Vector(element.Centre, e.Coordinates).GetLength() < this.radious);
+
+                foreach (Node nodeToCheck in nodesInRadious)
                 {
-                    var distance = new Vector(element.Centre, e.Coordinates).GetLength();
-                    return distance <= this.radious;
-                });
-
-                foreach (Node nodeToCheck in nodesInRadious)//this.nodes)
-                {
-                    //check distance between centre of the element and node
-                    //double distance = new Vector(element.Centre, nodeToCheck.Coordinates).GetLength();
-                    this.cancellationToken.ThrowIfCancellationRequested();
-                    //if (distance<=this.radious)
-                    //{
-                    //node is in proximity of element
-                    //check all nodes
-                    for (int i = 0; i <= element.Nodes.Count - 2; i++)
-                    {
-                        Node elementNode1 = element.Nodes[i];
-                        Node elementNode2 = element.Nodes[i + 1];
-
-                        if (NodePositionCheck.CheckNodes(elementNode1, elementNode2, nodeToCheck))
-                        {
-                            //incoherent element
-                            incoherentElements.Add(element.Number.ToString());
-
-                            //adding adjacent elements to incoherent node
-                            var adjacentElements = this.elements.Where(e => e.Nodes.Any(n => n == nodeToCheck));
-                            var adjacentElementList = adjacentElements.Select(e => e.Number.ToString()).ToList();
-                            incoherentElements = incoherentElements.Concat(adjacentElementList).ToList();
-                            //incoherentElements.AddRange(adjacentElements);
-                        }
-                    }
-
-                    //}
+                    CheckNode(incoherentElements, element, nodeToCheck);
                 }
-                ProgressArgument progressArgument = new ProgressArgument();
-                progressArgument.Progress = Convert.ToInt32(Convert.ToDouble(currentElement) / Convert.ToDouble(numberOfElements) * 100);
-                progressArgument.Message = element.Number.ToString();
-                this.progressReport.Report(progressArgument);
+
+                ReportProgress(numberOfElements, currentElement, element);
                 currentElement++;
             }
             return incoherentElements.Distinct().ToList();
+        }
+
+        private void CheckNode(List<string> incoherentElements, Element element, Node nodeToCheck)
+        {
+            this.cancellationToken.ThrowIfCancellationRequested();
+
+            for (int i = 0; i <= element.Nodes.Count - 2; i++)
+            {
+                var elementNode1 = element.Nodes[i];
+                var elementNode2 = element.Nodes[i + 1];
+
+                if (NodePositionCheck.CheckNodes(elementNode1, elementNode2, nodeToCheck))
+                {
+                    incoherentElements.Add(element.Number.ToString());
+
+                    var adjacentElements = this.elements
+                        .Where(e => e.Nodes.Any(n => n == nodeToCheck))
+                        .Select(e => e.Number.ToString()).ToList();
+
+                    incoherentElements.AddRange(adjacentElements);
+                }
+            }
+        }
+
+        private void ReportProgress(int numberOfElements, int currentElement, Element element)
+        {
+            ProgressArgument progressArgument = new ProgressArgument
+            {
+                Progress = Convert.ToInt32(Convert.ToDouble(currentElement) / Convert.ToDouble(numberOfElements) * 100),
+                Message = element.Number.ToString()
+            };
+            this.progressReport.Report(progressArgument);
         }
     }
 }

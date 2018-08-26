@@ -21,7 +21,7 @@ namespace IncoherentMeshChecker.Model.Incoherentness.Tests
             Node nodeToCheck = new Node(3, new PointD(0.5001458, 2.0001458, 5.0001458));
      
            
-            Assert.IsTrue(PositionOfNodes.NodesLinearity(node1, node2, nodeToCheck));
+            Assert.IsTrue(NodePosition.NodesLinearity(node1, node2, nodeToCheck));
         }
         [TestMethod()]
         public void CheckNodesLinearity_TwoNotParallelVectors_Failed()
@@ -31,7 +31,7 @@ namespace IncoherentMeshChecker.Model.Incoherentness.Tests
             Node nodeToCheck = new Node(3, new PointD(0.5, 2, 5));
         
 
-            Assert.IsFalse(PositionOfNodes.NodesLinearity(node1, node2, nodeToCheck));
+            Assert.IsFalse(NodePosition.NodesLinearity(node1, node2, nodeToCheck));
         }
     }
 }
