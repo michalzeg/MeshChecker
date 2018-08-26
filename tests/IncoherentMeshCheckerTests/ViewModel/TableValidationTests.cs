@@ -19,6 +19,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
 
             Assert.IsTrue(tw.ValidateNodeHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateTableWithoutNodeHeader_Failed()
         {
@@ -27,6 +28,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
 
             Assert.IsFalse(tw.ValidateNodeHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateTableWithoutXHeader_Failed()
         {
@@ -35,6 +37,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
 
             Assert.IsFalse(tw.ValidateNodeHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateTableWithoutYHeader_Failed()
         {
@@ -43,6 +46,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
 
             Assert.IsFalse(tw.ValidateNodeHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateTableWithoutZHeader_Failed()
         {
@@ -67,13 +71,15 @@ namespace IncoherentMeshChecker.ViewModel.Tests
             TableValidation tw = new TableValidation();
             Assert.IsFalse(tw.ValidateElementHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateElementTableWithoutNode1_Failed()
         {
-            string[] firstRow = { "Element", "k", "Node2", "Node3", "Node4","5" };
+            string[] firstRow = { "Element", "k", "Node2", "Node3", "Node4", "5" };
             TableValidation tw = new TableValidation();
             Assert.IsFalse(tw.ValidateElementHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateElementTableWithoutNode2_Failed()
         {
@@ -81,6 +87,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
             TableValidation tw = new TableValidation();
             Assert.IsFalse(tw.ValidateElementHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateElementTableWithoutNode3_Failed()
         {
@@ -88,6 +95,7 @@ namespace IncoherentMeshChecker.ViewModel.Tests
             TableValidation tw = new TableValidation();
             Assert.IsFalse(tw.ValidateElementHeader(firstRow));
         }
+
         [TestMethod()]
         public void Validate_ValidateElementTableWithoutNode4_Failed()
         {

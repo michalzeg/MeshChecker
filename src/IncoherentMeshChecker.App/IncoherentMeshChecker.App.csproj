@@ -79,12 +79,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Calculations\Element.cs" />
+    <Compile Include="Calculations\ElementType.cs" />
+    <Compile Include="Calculations\Line.cs" />
+    <Compile Include="Calculations\Node.cs" />
+    <Compile Include="Calculations\NodePositionCheck.cs" />
+    <Compile Include="Calculations\PointD.cs" />
+    <Compile Include="Calculations\PositionOfNodes.cs" />
+    <Compile Include="Calculations\QuadElement.cs" />
+    <Compile Include="Calculations\TriangleElement.cs" />
+    <Compile Include="Helpers\NodeTable.cs" />
     <Compile Include="Helpers\ProgressArgument.cs" />
     <Compile Include="Helpers\PropertyName.cs" />
-    <Compile Include="Model\Elements.cs" />
+    <Compile Include="Calculations\BeamElement.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Model\Geometry.cs" />
-    <Compile Include="Model\IncoherentnessCheck.cs" />
+    <Compile Include="Calculations\Geometry.cs" />
+    <Compile Include="Calculations\IncoherentnessCheck.cs" />
     <Page Include="StylesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,7 +111,7 @@
     <Compile Include="ViewModel\TableDataConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PastingDataFromClipBoard.cs" />
-    <Compile Include="Helpers\TableData.cs" />
+    <Compile Include="Helpers\ElementTable.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
