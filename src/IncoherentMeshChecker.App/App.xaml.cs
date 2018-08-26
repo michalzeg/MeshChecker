@@ -11,7 +11,7 @@ namespace IncoherentMeshChecker
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class View : Application
     {
     }
 }

@@ -69,13 +69,13 @@
     <Compile Include="ViewModel\TableValidationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\IncoherentMeshChecker\IncoherentMeshChecker.csproj">
-      <Project>{39EA0E7D-B71C-4B8F-A951-DCE772C20AE9}</Project>
-      <Name>IncoherentMeshChecker</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\src\IncoherentMeshChecker.App\IncoherentMeshChecker.App.csproj">
+      <Project>{39ea0e7d-b71c-4b8f-a951-dce772c20ae9}</Project>
+      <Name>IncoherentMeshChecker.App</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
