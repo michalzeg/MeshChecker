@@ -79,23 +79,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Calculations\Element.cs" />
-    <Compile Include="Calculations\ElementType.cs" />
-    <Compile Include="Calculations\Line.cs" />
-    <Compile Include="Calculations\Node.cs" />
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\ElementType.cs" />
+    <Compile Include="Geometry\Line.cs" />
+    <Compile Include="Node\Node.cs" />
     <Compile Include="Calculations\NodePositionCheck.cs" />
-    <Compile Include="Calculations\PointD.cs" />
-    <Compile Include="Calculations\NodePosition.cs" />
-    <Compile Include="Calculations\QuadElement.cs" />
-    <Compile Include="Calculations\TriangleElement.cs" />
+    <Compile Include="Geometry\PointD.cs" />
+    <Compile Include="Node\NodePosition.cs" />
+    <Compile Include="Elements\QuadElement.cs" />
+    <Compile Include="Elements\TriangleElement.cs" />
     <Compile Include="Extensions\CollectionExtension.cs" />
-    <Compile Include="Helpers\ClipboardOperations.cs" />
-    <Compile Include="Helpers\NodeTable.cs" />
+    <Compile Include="Clipboard\ClipboardOperations.cs" />
+    <Compile Include="Tables\NodeTable.cs" />
     <Compile Include="Helpers\ProgressArgument.cs" />
     <Compile Include="Helpers\PropertyName.cs" />
-    <Compile Include="Calculations\BeamElement.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Calculations\Vector.cs" />
+    <Compile Include="Elements\BeamElement.cs" />
+    <Compile Include="Extensions\DoubleExtension.cs" />
+    <Compile Include="Geometry\Vector.cs" />
     <Compile Include="Calculations\IncoherentnessCheck.cs" />
     <Page Include="StylesDictionary.xaml">
       <SubType>Designer</SubType>
@@ -109,13 +109,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\TableOperations.cs" />
+    <Compile Include="Tables\TableOperations.cs" />
     <Compile Include="Validation\TableValidation.cs" />
     <Compile Include="Validation\TableHeaderValidation.cs" />
     <Compile Include="ViewModel\TableDataConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="Helpers\PastingDataFromClipBoard.cs" />
-    <Compile Include="Helpers\ElementTable.cs" />
+    <Compile Include="Clipboard\PastingDataFromClipBoard.cs" />
+    <Compile Include="Tables\ElementTable.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
