@@ -10,11 +10,9 @@ using System.Windows;
 
 namespace IncoherentMeshChecker.ViewModel
 {
-    
     public class PasteToDataGridView
     {
         private readonly char[] rowSplitter = { '\n', '\r' };  // Cr and Lf.
-        private readonly char columnSplitter = '\t';         // Tab.
         private CancellationToken cancellationToken;
 
         public List<string> Errors { get; private set; }
@@ -22,12 +20,11 @@ namespace IncoherentMeshChecker.ViewModel
         public PasteToDataGridView(CancellationToken cancellationToken)
         {
             this.cancellationToken = cancellationToken;
-            this.Errors = new List<string>();        
+            this.Errors = new List<string>();
         }
 
         public bool PasteNodeTable(ref IList<NodeTable> table, IDataObject dataInClipboard)
         {
-
             bool result = true;
             this.Errors.Clear();
             ClipboardOperations clipboardOperation = new ClipboardOperations(dataInClipboard);
@@ -49,10 +46,9 @@ namespace IncoherentMeshChecker.ViewModel
 
                 // Cycle through cells.
                 // Assign cell value only if within columns of grid:
-                
+
                 int node;
                 double x, y, z;
-
 
                 if (int.TryParse(valuesInRow[indexOfNode], out node) &&
                     double.TryParse(valuesInRow[indexOfX], out x) &&
@@ -76,12 +72,12 @@ namespace IncoherentMeshChecker.ViewModel
             }
             return result;
         }
+
         public bool PasteElementTable(ref ICollection<ElementTable> table, IDataObject dataInClipboard)
         {
             bool result = true;
             this.Errors.Clear();
             ClipboardOperations clipboardOperation = new ClipboardOperations(dataInClipboard);
-
 
             IEnumerable<string> rowsInclipboard = clipboardOperation.AllRows;
 
@@ -95,7 +91,7 @@ namespace IncoherentMeshChecker.ViewModel
 
             //check if columt names exist
             if (indexOfElement == -1 || indexOfNode1 == -1 || indexOfNode2 == -1 || indexOfNode3 == -1 || indexOfNode4 == -1)
-                    return false;
+                return false;
             foreach (string row in rowsInclipboard)
             {
                 //check if row is first row
@@ -108,7 +104,6 @@ namespace IncoherentMeshChecker.ViewModel
                 // Assign cell value only if within columns of grid:
                 ElementTable elementTable = new ElementTable();
                 int element, node1, node2, node3, node4;
-
 
                 if (int.TryParse(valuesInRow[indexOfElement], out element) &&
                     int.TryParse(valuesInRow[indexOfNode1], out node1) &&
@@ -140,6 +135,7 @@ namespace IncoherentMeshChecker.ViewModel
             } // end while
             return result;
         }
+
         private string[] splitRows()
         {
             IDataObject dataInClipboard = Clipboard.GetDataObject();
@@ -148,6 +144,7 @@ namespace IncoherentMeshChecker.ViewModel
             return rowsInClipboard;
         }
     }
+
     public class TableValidation
     {
         private readonly string[] nodeTableHeaders = { "Node", "X", "Y", "Z" };
@@ -155,16 +152,14 @@ namespace IncoherentMeshChecker.ViewModel
         private readonly string nodeValidationPattern = @"\bNode\b.*\bX.*\bY.*\bZ";
         private readonly string elementValidationPattern = @"\bElement\b.*\bNode1\b.*\bNode2\b.*\bNode3\b.*\bNode4\b";
 
-        
         public bool ValidateNodeHeader(IEnumerable<string> headers)
         {
             //checks if node table contains appropriate headers
             bool result = true;
             foreach (string header in nodeTableHeaders)
             {
-
                 if (!headers.Contains(header))
-                
+
                 {
                     result = false;
                     break;
@@ -172,6 +167,7 @@ namespace IncoherentMeshChecker.ViewModel
             }
             return result;
         }
+
         public bool ValidateNodeHeader(string firstRow)
         {
             Regex regex = new Regex(this.nodeValidationPattern);
@@ -179,6 +175,7 @@ namespace IncoherentMeshChecker.ViewModel
 
             return match.Success;
         }
+
         public bool ValidateElementHeader(IEnumerable<string> headers)
         {
             bool result = true;
@@ -191,17 +188,15 @@ namespace IncoherentMeshChecker.ViewModel
                 }
             }
             return result;
-    }
+        }
+
         public bool ValidateElementHeader(string firstRow)
         {
             Regex regex = new Regex(this.elementValidationPattern);
             Match match = regex.Match(firstRow);
             return match.Success;
         }
-
-
     }
-    
 
     public class TableOperations
     {
@@ -225,7 +220,7 @@ namespace IncoherentMeshChecker.ViewModel
                     index++;
                     continue;
                 }
-                if (itemToCheck.Substring(0,length)==valueToCheck)
+                if (itemToCheck.Substring(0, length) == valueToCheck)
                 {
                     return index;
                 }
@@ -257,6 +252,7 @@ namespace IncoherentMeshChecker.ViewModel
                 this.rowsInClipboard = null;
             }
         }
+
         public IEnumerable<string> AllRows
         {
             get
@@ -264,6 +260,7 @@ namespace IncoherentMeshChecker.ViewModel
                 return this.rowsInClipboard;
             }
         }
+
         public IEnumerable<string> ItemsInFirstRow
         {
             get
@@ -276,6 +273,7 @@ namespace IncoherentMeshChecker.ViewModel
                 return null;
             }
         }
+
         public string FirstRow
         {
             get
@@ -294,5 +292,4 @@ namespace IncoherentMeshChecker.ViewModel
             return row.Split(columnSplitter);
         }
     }
-
 }
