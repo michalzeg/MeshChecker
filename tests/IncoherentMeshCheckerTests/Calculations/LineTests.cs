@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.Shared.Geometry;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IncoherentMeshChecker.Model.Geometry.Tests
+namespace IncoherentMeshCheckerTests.Model
 {
     [TestClass()]
     public class LineTests

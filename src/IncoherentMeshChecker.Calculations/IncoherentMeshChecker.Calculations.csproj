@@ -47,8 +47,8 @@
     <Compile Include="Elements\ElementType.cs" />
     <Compile Include="Elements\QuadElement.cs" />
     <Compile Include="Elements\TriangleElement.cs" />
-    <Compile Include="Node\Node.cs" />
-    <Compile Include="Node\NodePosition.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\NodePosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

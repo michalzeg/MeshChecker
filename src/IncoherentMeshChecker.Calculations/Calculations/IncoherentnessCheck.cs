@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IncoherentMeshChecker.Model.Elements;
-using IncoherentMeshChecker.Model.Geometry;
-using Extensions;
-using IncoherentMeshChecker.Helpers;
 using System.Threading;
 using System.Collections.ObjectModel;
+using IncoherentMeshChecker.Calculations.Elements;
+using IncoherentMeshChecker.Shared.Helpers;
+using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Geometry;
 
-namespace IncoherentMeshChecker.Model.Incoherentness
+namespace IncoherentMeshChecker.Calculations.Calculations
 {
     public class IncoherentnessChecker
     {

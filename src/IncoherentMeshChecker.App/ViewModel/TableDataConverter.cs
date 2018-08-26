@@ -1,6 +1,7 @@
-﻿using IncoherentMeshChecker.Helpers;
-using IncoherentMeshChecker.Model.Elements;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.App.Tables;
+using IncoherentMeshChecker.Calculations.Elements;
+using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

@@ -1,7 +1,7 @@
-﻿using System;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.Shared.Geometry;
+using System;
 
-namespace IncoherentMeshChecker.Model.Elements
+namespace IncoherentMeshChecker.Calculations.Nodes
 {
     public class Node : IEquatable<Node>
     {

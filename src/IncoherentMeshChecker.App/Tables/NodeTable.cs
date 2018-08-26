@@ -1,4 +1,4 @@
-﻿namespace IncoherentMeshChecker.Helpers
+﻿namespace IncoherentMeshChecker.App.Tables
 {
     public class NodeTable
     {

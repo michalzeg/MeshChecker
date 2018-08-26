@@ -1,8 +1,7 @@
-﻿using System;
-using IncoherentMeshChecker.Model.Elements;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.Shared.Geometry;
+using System;
 
-namespace IncoherentMeshChecker.Model.Incoherentness
+namespace IncoherentMeshChecker.Calculations.Nodes
 {
     public static class NodePosition
     {

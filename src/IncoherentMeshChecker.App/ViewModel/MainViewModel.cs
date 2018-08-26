@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using IncoherentMeshChecker.Helpers;
 using System.Windows;
 using IncoherentMeshChecker.Converter;
-using IncoherentMeshChecker.Model.Incoherentness;
 using System.Threading.Tasks;
 using System.Threading;
+using IncoherentMeshChecker.Shared.Helpers;
+using IncoherentMeshChecker.App.Tables;
+using IncoherentMeshChecker.Calculations.Calculations;
 
 namespace IncoherentMeshChecker.ViewModel
 {

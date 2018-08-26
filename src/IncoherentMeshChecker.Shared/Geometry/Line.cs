@@ -1,4 +1,4 @@
-﻿namespace IncoherentMeshChecker.Model.Geometry
+﻿namespace IncoherentMeshChecker.Shared.Geometry
 {
     public class Line
     {

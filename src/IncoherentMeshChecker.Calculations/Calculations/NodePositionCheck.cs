@@ -1,6 +1,6 @@
-﻿using IncoherentMeshChecker.Model.Elements;
+﻿using IncoherentMeshChecker.Calculations.Nodes;
 
-namespace IncoherentMeshChecker.Model.Incoherentness
+namespace IncoherentMeshChecker.Calculations.Calculations
 {
     /// <summary>
     /// Algorithm

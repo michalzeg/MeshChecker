@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Geometry;
+using System.Collections.Generic;
 
-namespace IncoherentMeshChecker.Model.Elements
+namespace IncoherentMeshChecker.Calculations.Elements
 {
     public class QuadElement : Element
     {

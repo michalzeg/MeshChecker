@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Extensions;
+﻿using IncoherentMeshChecker.Shared.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extensions.Tests
+namespace IncoherentMeshCheckerTests.Model
 {
     [TestClass()]
     public class ExtensionMethodsTests
@@ -18,8 +18,9 @@ namespace Extensions.Tests
             double value1 = 1.00;
             double value2 = 1 * 0.1 / 0.1;
 
-            Assert.IsTrue(value1.IsApproximatelyEqualTo(value2,maximumDifferenceAllowable));
+            Assert.IsTrue(value1.IsApproximatelyEqualTo(value2, maximumDifferenceAllowable));
         }
+
         [TestMethod()]
         public void IsApproxiamtelyEqual_CheckIfTwoNumbersAreEqual2_Passed()
         {
@@ -30,6 +31,5 @@ namespace Extensions.Tests
 
             Assert.IsTrue(value1.IsApproximatelyEqualTo(value2));
         }
-
     }
 }

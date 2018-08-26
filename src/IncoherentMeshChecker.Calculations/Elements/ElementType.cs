@@ -1,4 +1,4 @@
-﻿namespace IncoherentMeshChecker.Model.Elements
+﻿namespace IncoherentMeshChecker.Calculations.Elements
 {
     public enum ElementType
     {

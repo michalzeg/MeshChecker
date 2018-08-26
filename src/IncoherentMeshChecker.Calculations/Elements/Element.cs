@@ -1,10 +1,11 @@
-﻿using System;
+﻿using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Extensions;
+using IncoherentMeshChecker.Shared.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Extensions;
-using IncoherentMeshChecker.Model.Geometry;
 
-namespace IncoherentMeshChecker.Model.Elements
+namespace IncoherentMeshChecker.Calculations.Elements
 {
     public abstract class Element : IEquatable<Element>
     {

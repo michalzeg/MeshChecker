@@ -1,13 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IncoherentMeshChecker.Model.Elements;
+﻿using IncoherentMeshChecker.Calculations.Elements;
+using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Geometry;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IncoherentMeshChecker.Model.Geometry;
 
-namespace IncoherentMeshChecker.Model.Elements.Tests
+namespace IncoherentMeshCheckerTests.Model
 {
     [TestClass()]
     public class BeamElementTests

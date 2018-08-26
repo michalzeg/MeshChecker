@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IncoherentMeshChecker.Model.Geometry;
+﻿using IncoherentMeshChecker.Shared.Geometry;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IncoherentMeshChecker.Model.Geometry.Tests
+namespace IncoherentMeshCheckerTests.Model
 {
     [TestClass()]
     public class VectorTests
@@ -41,7 +41,6 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
             Vector expectedVector = new Vector(10, 5, 8);
             Vector actualVector = v1 + v2;
             Assert.AreEqual(expectedVector, actualVector);
-
         }
 
         [TestMethod()]
@@ -54,6 +53,7 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
             Vector actualVector = v1 - v2;
             Assert.AreEqual(expectedVector, actualVector);
         }
+
         [TestMethod()]
         public void Multiply_MultiplyDoubleByVector_Calcualted()
         {
@@ -63,6 +63,7 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
             Vector actualVector = 0.5 * v;
             Assert.AreEqual(expectedVector, actualVector);
         }
+
         [TestMethod()]
         public void Multiply_MultiplyVectorByDouble_Calcualted()
         {
@@ -72,6 +73,7 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
             Vector actualVector = v * 0.5;
             Assert.AreEqual(expectedVector, actualVector);
         }
+
         [TestMethod()]
         public void CrossProduct_CalculateCrossProduct_Calculated()
         {
@@ -105,6 +107,7 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
 
             Assert.IsTrue(v11.Equals(v2));
         }
+
         [TestMethod()]
         public void Equals_ComparingTwoTheSameVectorsUsingOperator_Passed()
         {
@@ -113,6 +116,7 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
 
             Assert.IsTrue(v1 == v2);
         }
+
         [TestMethod()]
         public void Equals_ComparingTwoDifferentVectorsUsingOperator_Failed()
         {
@@ -121,14 +125,14 @@ namespace IncoherentMeshChecker.Model.Geometry.Tests
 
             Assert.IsFalse(v1 == v2);
         }
-        
+
         [TestMethod()]
         public void Equals_ComparingTheSameVector_Passed()
         {
             var v1 = new Vector(1.1, 0.1, -0.1);
             var v2 = v1 * 0.1 * 10;
 
-            Assert.AreEqual(v1, v2); 
+            Assert.AreEqual(v1, v2);
         }
     }
 }

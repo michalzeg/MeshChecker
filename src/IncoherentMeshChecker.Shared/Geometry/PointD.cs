@@ -1,7 +1,7 @@
-﻿using Extensions;
+﻿using IncoherentMeshChecker.Shared.Extensions;
 using System;
 
-namespace IncoherentMeshChecker.Model.Geometry
+namespace IncoherentMeshChecker.Shared.Geometry
 {
     public class PointD : IEquatable<PointD>
     {

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extensions
+namespace IncoherentMeshChecker.Shared.Extensions
 {
     public static class DoubleExtension
     {

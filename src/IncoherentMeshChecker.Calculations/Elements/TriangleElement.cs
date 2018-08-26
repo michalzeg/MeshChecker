@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using IncoherentMeshChecker.Calculations.Nodes;
+using IncoherentMeshChecker.Shared.Geometry;
+using System.Collections.Generic;
 using System.Linq;
-using IncoherentMeshChecker.Model.Geometry;
 
-namespace IncoherentMeshChecker.Model.Elements
+namespace IncoherentMeshChecker.Calculations.Elements
 {
     public class TriangleElement : Element
     {

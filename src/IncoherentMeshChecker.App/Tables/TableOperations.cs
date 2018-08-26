@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IncoherentMeshChecker.ViewModel
+namespace IncoherentMeshChecker.App.Tables
 {
     public class TableOperations
     {
