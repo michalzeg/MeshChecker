@@ -79,24 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Elements\Element.cs" />
-    <Compile Include="Elements\ElementType.cs" />
-    <Compile Include="Geometry\Line.cs" />
-    <Compile Include="Node\Node.cs" />
-    <Compile Include="Calculations\NodePositionCheck.cs" />
-    <Compile Include="Geometry\PointD.cs" />
-    <Compile Include="Node\NodePosition.cs" />
-    <Compile Include="Elements\QuadElement.cs" />
-    <Compile Include="Elements\TriangleElement.cs" />
-    <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Clipboard\ClipboardOperations.cs" />
     <Compile Include="Tables\NodeTable.cs" />
-    <Compile Include="Helpers\ProgressArgument.cs" />
-    <Compile Include="Helpers\PropertyName.cs" />
-    <Compile Include="Elements\BeamElement.cs" />
-    <Compile Include="Extensions\DoubleExtension.cs" />
-    <Compile Include="Geometry\Vector.cs" />
-    <Compile Include="Calculations\IncoherentnessCheck.cs" />
     <Page Include="StylesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\clipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IncoherentMeshChecker.Calculations\IncoherentMeshChecker.Calculations.csproj">
+      <Project>{5a6eadf8-0a17-426d-8736-82f5adc5de59}</Project>
+      <Name>IncoherentMeshChecker.Calculations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

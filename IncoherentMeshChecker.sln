@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{819E8F92-49C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2ED5305B-D04D-43E1-9F17-B6448CBB68A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncoherentMeshChecker.Calculations", "src\IncoherentMeshChecker.Calculations\IncoherentMeshChecker.Calculations.csproj", "{5A6EADF8-0A17-426D-8736-82F5ADC5DE59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A1ABEFC5-2AE2-496A-8000-C01BDBD7037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1ABEFC5-2AE2-496A-8000-C01BDBD7037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1ABEFC5-2AE2-496A-8000-C01BDBD7037F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6EADF8-0A17-426D-8736-82F5ADC5DE59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6EADF8-0A17-426D-8736-82F5ADC5DE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6EADF8-0A17-426D-8736-82F5ADC5DE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6EADF8-0A17-426D-8736-82F5ADC5DE59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{39EA0E7D-B71C-4B8F-A951-DCE772C20AE9} = {819E8F92-49C1-4B8B-A4FD-EF3F36402E01}
 		{A1ABEFC5-2AE2-496A-8000-C01BDBD7037F} = {2ED5305B-D04D-43E1-9F17-B6448CBB68A1}
+		{5A6EADF8-0A17-426D-8736-82F5ADC5DE59} = {819E8F92-49C1-4B8B-A4FD-EF3F36402E01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F94CBC0-3D90-4CFA-BD80-84E1907C01AD}
